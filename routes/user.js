@@ -4,6 +4,59 @@ const bcrypt = require('bcrypt');
 const jwt = require( 'jsonwebtoken');
 const res = require('express/lib/response');
 const router=express.Router();
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     Admin:
+ *       type: object
+ *       required:
+ *         - name
+ *         - lastname
+ *         - email
+ *         - password
+ *         - role
+ *       properties:
+ *         name:
+ *           type: string
+ *         lastname:
+ *           type: string
+ *         email:
+ *           type: string
+ *           format: email
+ *         password:
+ *           type: string
+ *         role:
+ *           type: string
+ *           enum:
+ *             - admin
+ *             - user
+ */
+
+/**
+ * @swagger
+ * tags:
+ *   name: Admin
+ *   description: Admin user endpoints
+ * 
+ * /admin:
+ *   post:
+ *     summary: Create a new admin user
+ *     description: Create a new admin user with a name, lastname, email, password, and role.
+ *     tags: [Admin]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Admin'
+ *     responses:
+ *       '201':
+ *         description: Admin user created successfully
+ *       '400':
+ *         description: Bad request
+ */
+
 router.post('/register',(req,res)=>{
     let adminfrombody=req.body;
     let admin = new Admin(adminfrombody);
